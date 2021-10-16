@@ -92,9 +92,18 @@ public:
 
     }
 
-    char getValue(){
+    char getValue(){ //! Returns the current element;
         char val = cur->next->value;
         return (val);
+    }
+
+    void get_string(){
+        Node* temp = head;
+        while (temp->next!= nullptr){
+            temp=temp->next;
+            cout<< temp->value;
+        }
+
     }
 
 
@@ -114,21 +123,34 @@ int main() {
         else
         {
             text->renew();
+            for (int i = 0; i < beiju.length(); ++i)
+            {
+                if(beiju[i] == '['){
+                    text->move_cur_start();
+                }
+                else if (beiju[i] == ']'){
+                    text->move_cur_end();
+                }
+                else{
+                    text->insert(beiju[i]);
+                    text->move_cur_next();
+                }
 
 
+
+
+
+
+
+            }
+
+            text->get_string();
+            cout<< "\n";
 
 
 
         }
     }
-
-
-
-
-
-
-
-
 
 
     delete text;
