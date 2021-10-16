@@ -6,7 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/clesson/Projects/clion/list1B/main.cpp
+/home/clesson/Projects/MainAlgorithms_Codes/list1B/main.cpp
 iostream
+-
+string
 -
 

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -6,15 +7,15 @@ using namespace std;
 
 class Node {
 public:
-    int value;
+    char value;
     Node *next;
 
-    Node(int node_value, Node *node_pointer) {
+    Node(char node_value, Node *node_pointer) {
         value = node_value;
         next = node_pointer;
     }
     Node(){
-        value= NULL;
+        value = NULL;
         next = nullptr;
     }
 };
@@ -48,9 +49,8 @@ public:
         init();
     }
 
-    void print() const;
 
-    void insert(int value){ //! Inserts a new element right at the cursor position;
+    void insert(char value){ //! Inserts a new element right at the cursor position;
         cur->next = new Node(value, cur->next);
         if (tail == cur){
             tail = cur->next;
@@ -58,13 +58,13 @@ public:
         elt++;
     }
 
-    void append(int value) { //! Append an item to the end of the list;
+    void append(char value) { //! Append an item to the end of the list;
         tail = tail->next = new Node(value, nullptr);
         elt++;
     }
 
-    int remove(){ //? Removes the cursor item;
-        int temp_val = cur->next->value;
+    char remove(){ //? Removes the cursor item;
+        char temp_val = cur->next->value;
         Node* temp_node = cur->next;
         if (tail == cur->next) tail = cur;
         cur->next = cur->next->next;
@@ -92,8 +92,8 @@ public:
 
     }
 
-    int getValue(){
-        int val = cur->next->value;
+    char getValue(){
+        char val = cur->next->value;
         return (val);
     }
 
@@ -103,13 +103,34 @@ public:
 
 
 int main() {
+    LList* text = new LList;
 
-    LList* test = new LList;
+    string beiju;
+
+    while (getline(cin, beiju)) { // ! Loop responsible for reading the beiju text, if there's an EOF it will stop;
+        if (!cin) {
+            break;
+        }
+        else
+        {
+            text->renew();
 
 
 
 
 
-    delete test;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+    delete text;
     return 0;
 }
