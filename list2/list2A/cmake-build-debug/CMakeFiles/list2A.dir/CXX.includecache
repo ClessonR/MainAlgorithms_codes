@@ -7,8 +7,6 @@
 #IncludeRegexTransform: 
 
 /home/clesson/Projects/MainAlgorithms_Codes/list2/list2A/main.cpp
-iostream
--
-cmath
+bits/stdc++.h
 -
 

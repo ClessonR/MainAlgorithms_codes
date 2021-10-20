@@ -1,13 +1,11 @@
-#include <iostream>
-#include <cmath>
-
-
-
+#include <bits/stdc++.h>
 using namespace std;
 
 long int binary_search(long int main_array[],long int l,long int r,long int find); //? A binary search function which receives an array, its number of elements and an item to find;
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
 
     long int number_elt, queries =0;
 
@@ -41,9 +39,13 @@ long int binary_search(long int main_array[], long int l, long int r, long int f
     }
     else
     {
-        m = floor((l + r)/2);
+        m = (l + r)/2;
 
         if(main_array[m] == find){
+            for (long int i = l; i < m; ++i) {
+                if(main_array[i] == find) return i;
+
+            }
             return m;
         }
         else if(find > main_array[m]){
