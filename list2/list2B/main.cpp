@@ -2,14 +2,14 @@
 using namespace std;
 
 
-void merger(long int main_array[], long int low, long int mid,long int high){
-    long int i, j, k;
-    long int left[mid-low+1]; //? Sub-array for elements in the left;
-    long int right[high-mid]; //? Sub-array for elements in the right;
-    for (long int b = 0; b < mid-low+1 ; ++b) { //! Copying elements to left sub-array;
+void merger(long long int main_array[], long long int low, long long int mid,long long int high){
+    long long int i, j, k;
+    long long int left[mid-low+1]; //? Sub-array for elements in the left;
+    long long int right[high-mid]; //? Sub-array for elements in the right;
+    for (long long int b = 0; b < mid-low+1 ; ++b) { //! Copying elements to left sub-array;
         left[b] = main_array[low + b];
     }
-    for (long int l = 0; l < high-mid ; ++l) { //! Copying elements to right sub-array
+    for (long long int l = 0; l < high-mid ; ++l) { //! Copying elements to right sub-array
         right[l] = main_array[mid + 1 +l];
     }
     i=0;
@@ -28,7 +28,7 @@ void merger(long int main_array[], long int low, long int mid,long int high){
 
 }
 
-void merge_sort(long int main_array[], long int low, long int high){
+void merge_sort(long long int main_array[], long long int low, long long int high){
     if(low>=high){
         return;}
     merge_sort(main_array, low,(high+low)/2);
@@ -43,36 +43,35 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    long int bars, coupons;
+    long long int bars, coupons;
 
     cin >> bars;
 
-    long int* choc_bars = new long int[bars];
+    long long int* choc_bars = new long long int[bars];
 
-    for (int i = 0; i < bars ; ++i) { //! Input receiver;
+    for (long long int i = 0; i < bars ; ++i) { //! Input receiver;
         cin >> choc_bars[i];
     }
     merge_sort(choc_bars,0,(bars-1)); //? Sorting the array;
 
     cin >> coupons;
-    long int* coupons_array = new long int[coupons];
+    long long int* coupons_array = new long long int[coupons];
 
-    for (int i = 0; i < coupons ; ++i) { //! Input Receiver;
+    for (long long int i = 0; i < coupons ; ++i) { //! Input Receiver;
         cin >> coupons_array[i];
     }
 
+    long long int total_val = 0;
+    for (long long int i = 0; i <bars ; ++i) {
+        total_val += choc_bars[i];
+    }
 
-
-    for (int i = 0; i < coupons ; ++i) {
-        long int temp = 0,temp_val = 0, total_val = 0;
+    for (long int i = 0; i < coupons ; ++i) {
+        long long int temp_val = 0, temp = 0;
 
         temp = coupons_array[i]; //? Selecting the coupon;
 
-        for (long int j = bars; j > 0; --j) {
-            if(j != (bars-temp+1)) {
-                temp_val += choc_bars[j-1];
-            }
-        }
+        temp_val = total_val - choc_bars[bars-temp];
 
         if(i!=coupons-1) {
             cout << temp_val << "\n";
@@ -82,10 +81,6 @@ int main()
         }
 
     }
-
-
-
-
 
     //! Memory Dispensers;
     delete [] choc_bars;
