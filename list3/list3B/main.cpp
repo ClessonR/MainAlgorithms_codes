@@ -13,22 +13,22 @@ BSTree* insert(BSTree *main_tree, int input_val) //? Inserts a random number int
     BSTree *new_root = new BSTree(); //? Every new node is a new BST;
     new_root->value = input_val;
 
-    if(main_tree->value == 0){
+    if(main_tree->value == 0){ //! If the tree is empty
         main_tree->value = input_val;
     }
-    else if (input_val < (main_tree->value) ){
+    else if (input_val < (main_tree->value) ){ //! if the node to be inserted is smaller than the root;
         if( main_tree ->leftnode == NULL){
             main_tree ->leftnode = new_root;
         }else {
-            insert(main_tree->leftnode,input_val);
+            insert(main_tree->leftnode,input_val); //! If it's a non-empty node, it makes the same process again
         }
         }
     else{
-        if(main_tree->rightnode == NULL){
+        if(main_tree->rightnode == NULL){ //! if the node to be inserted is smaller than the root;
             main_tree->rightnode = new_root;
         }
         else{
-            insert(main_tree->rightnode, input_val);
+            insert(main_tree->rightnode, input_val); //! If it's a non-empty node, it makes the same process again
         }
     }
     return new_root;
