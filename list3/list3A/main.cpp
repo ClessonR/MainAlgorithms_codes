@@ -25,13 +25,13 @@ public:
         }
     }
 
-    void clear(){
-        for (int i = 0; i <max_size ; ++i) {
+    void clear(){ //! Reset the hashtable;
+        for (int i = 0; i < this->max_size ; ++i) {
             main_array[i] = "empt";
         }
         num_elt =0;
     }
-    void insert( long long int key, string word){
+    void insert( long long int key, string word){ //! Insert a key into the hash table, and if already inserted nothing happens;
         int position;
         for (int i = 0; i < 20 ; ++i) {
             position = int((key + pow(i,2) + 23*i)) % 101;
@@ -49,7 +49,7 @@ public:
 
     }
 
-    void del(string word, long long int key){
+    void del(string word, long long int key){ //! Deletes a key inside the hashtable;
         int position;
         for (int i = 0; i < 101 ; ++i) {
             position = int((key + pow(i,2) + 23*i)) % 101;
@@ -59,7 +59,8 @@ public:
             return;}
         }
     }
-    void table_show(){
+
+    void table_show(){ //! Print all the items inside the hash table
         int items = 0;
         for (int j = 0; j < 101; ++j) {
             if(items == this->num_elt-1){
@@ -115,6 +116,9 @@ int main()
         my_table->table_show();
 
         my_table->clear();
+        if(i != cases -1){
+            cout << '\n';
+        }
     }
 
 
