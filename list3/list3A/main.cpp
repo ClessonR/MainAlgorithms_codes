@@ -1,13 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-long long int hash_gen(string key){ //! Function that return the hashtable position;
+long long int hash_gen(string key){ //! Function that return the hashtable key;
     long long int h = 0;
     for (int i = 0; i < key.length() ; ++i) {
-        h += (key[i] * i);
+        h += (key[i] * (i+1));
     }
     h *= 19;
-    return  h;
+    return (h%101);
 }
 
 
@@ -33,7 +33,7 @@ public:
     }
     void insert( long long int key, string word){
         int position;
-        for (int i = 1; i < 20 ; ++i) {
+        for (int i = 0; i < 20 ; ++i) {
             position = int((key + pow(i,2) + 23*i)) % 101;
             if(main_array[position] == word){
                 return;}
@@ -60,14 +60,17 @@ public:
         }
     }
     void table_show(){
+        int items = 0;
         for (int j = 0; j < 101; ++j) {
-            if(j == 100){
-                if(main_array[100] != "empt"){
+            if(items == this->num_elt-1){
+                if(main_array[j] != "empt"){
                     cout << j << ':' << main_array[j];
+                    return;
                 }
             }
             else if(main_array[j] != "empt"){
                 cout << j << ':' << main_array[j] << "\n";
+                items++;
             }
 
         }
@@ -90,7 +93,7 @@ int main()
     string word;
     long long int key;
     cin >> cases;
-    for (int i = 0; i <cases ; ++i) {
+    for (int i = 0; i < cases ; ++i) {
         cin >> operations;
         for (int j = 0; j < operations ; ++j) {
 
