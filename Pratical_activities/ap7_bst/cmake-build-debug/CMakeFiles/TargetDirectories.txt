@@ -1,0 +1,3 @@
+/home/clesson/Projects/MainAlgorithms_Codes/Pratical_activities/ap7_bst/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/clesson/Projects/MainAlgorithms_Codes/Pratical_activities/ap7_bst/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/clesson/Projects/MainAlgorithms_Codes/Pratical_activities/ap7_bst/cmake-build-debug/CMakeFiles/ap7_bst.dir
