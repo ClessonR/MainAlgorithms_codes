@@ -37,14 +37,13 @@ public:
             position = int((key + pow(i,2) + 23*i)) % 101;
             if(main_array[position] == word){
                 return;}
-            else{
-                if(main_array[position] == "empt"){
-                    main_array[position] = word;
-                    num_elt++;
-                    return;
-                }
-
-            }
+        }
+        for (int i = 0; i < 20 ; ++i) {
+            position = int((key + pow(i,2) + 23*i)) % 101;
+            if(main_array[position] == "empt"){
+                main_array[position] = word;
+                num_elt++;
+                return;}
         }
 
     }
