@@ -1,224 +1,141 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "stdio.h"
+#include "stdlib.h"
 
-int index_main = 0;
-long int items= 0;
-
-struct Node{
-    long int value;
-    Node* left;
-    Node* right;
+typedef struct Node {
+    int item;
+    int l_child;
+    int r_child;
     int height;
-    int children;
-};
+    struct Node *left;
+    struct Node *right;
 
-class BSTree{
+} Node;
 
-    Node* root;
-    void clear(Node* a){ //? Clear all the bstree structure;
-        if(a == NULL)
-            return;
-        clear(a->left);
-        clear(a->right);
-        delete a;
+
+int height (Node *root) {
+    return (root == NULL) ? 0 : root -> height;
+}
+
+int max (int a, int b) {
+    return a > b ? a : b;
+}
+
+int show_balance_fac (Node *root) {
+    if (root == NULL) return 0;
+    else return height(root -> left) - height(root -> right);
+}
+
+Node *new_Node (int item, int l_child, int r_child) {
+    Node *tmp_Node = (Node *) malloc( sizeof(Node) );
+    tmp_Node -> item = item;
+    tmp_Node -> left = NULL;
+    tmp_Node -> right = NULL;
+    tmp_Node -> height = 1;
+    tmp_Node -> l_child = l_child;
+    tmp_Node -> r_child = r_child;
+    return tmp_Node;
+}
+
+Node *left_rotation (Node *main) {
+    Node *sec_main = main -> right;
+    Node *second_tree = sec_main -> left;
+
+    sec_main -> left = main;
+    main -> right = second_tree;
+
+    main -> height = max( height(main -> left), height(main -> right) ) + 1;
+    sec_main -> height = max( height(sec_main -> left), height(sec_main -> right) ) + 1;
+
+    if (second_tree != NULL) main -> r_child = second_tree -> l_child + second_tree -> r_child + 1; else main -> r_child = 0;
+    sec_main -> l_child = main -> l_child + main -> r_child + 1;
+
+    return sec_main;
+}
+
+Node *right_rotation (Node *main) {
+    Node *sec_main = main -> left;
+    Node *second_tree = sec_main -> right;
+
+    sec_main -> right = main;
+    main -> left = second_tree;
+
+    main -> height = max( height(main -> left), height(main -> right) ) + 1;
+    sec_main -> height = max( height(sec_main -> left), height(sec_main -> right) ) + 1;
+
+    if (second_tree != NULL) main -> l_child = second_tree -> l_child + second_tree -> r_child + 1; else main -> l_child = 0;
+    sec_main -> r_child = main -> l_child + main -> r_child + 1;
+
+    return sec_main;
+}
+
+short int temp_var;
+
+int main_find (Node *root, int item) {
+    if (root != NULL) {
+        if (item > root -> item) return root -> l_child + 1 + main_find(root -> right, item);
+        else if (item < root -> item) return main_find(root -> left, item);
+        else return root -> l_child;
+    } else {
+        temp_var = 1;
+        return -1;
+    };
+}
+
+Node *insert(Node *root, int item) {
+
+    if (root == NULL) return new_Node(item, 0, 0);
+    if (item < root -> item) {
+        root -> left = insert(root -> left, item);
+        root -> l_child++;
+    }
+    else if (item > root -> item) {
+        root -> right = insert(root -> right, item);
+        root -> r_child++;
+    }
+    else return root;
+
+    root -> height = max( height(root -> left), height(root -> right) ) + 1;
+
+    int balance = show_balance_fac(root);
+
+
+    if ( (balance > 1) && (item < root -> left -> item) ) return right_rotation(root);
+
+    if ( (balance < -1) && (item > root -> right -> item) ) return left_rotation(root);
+
+    if ( (balance > 1) && (item > root -> left -> item) ) {
+        root -> left = left_rotation(root -> left);
+        return right_rotation(root);
     }
 
-    //! Functions for basic AVL things//
-
-    int height( Node* a){ //? Return a node height;
-        return (a == NULL ? -1 : a->height);
+    if ( (balance < -1) && (item < root -> right -> item) ) {
+        root -> right = right_rotation(root -> right);
+        return left_rotation(root);
     }
 
-    Node* one_right_rotation( Node* &main)
-    {
-        if(main->left != NULL){
-        Node* temp = main->left;
-        main->left = temp->right;
-        temp->right = main;
-        main->height= max(height(main->left), height(main->right))+1;
-        temp->height = max(height(temp->left), main->height)+1;
-        return temp;
+    return root;
+}
+
+
+int main () {
+    int n;
+    scanf("%d", &n);
+    Node *root = NULL;
+    for (int i = 0; i < n; i++) {
+        short int command;
+        int value;
+        scanf("%hd%d", &command, &value);
+        if (command == 1) {
+
+            root = insert(root, value);
         }
-        return main;
-    }
-
-    Node* one_left_rotation( Node* &main)
-    {
-        if(main->right != NULL) {
-            Node *temp = main->right;
-            main->right = temp->left;
-            temp->left = main;
-            main->height = max(height(main->left), height(main->right)) + 1;
-            temp->height = max(height(main->right), main->height) + 1;
-            return temp;
-        }
-        return main;
-    }
-
-    Node* double_left_rotation ( Node* &main){
-        main->right = one_right_rotation(main->right);
-        return one_left_rotation(main);
-    }
-
-    Node* double_right_rotation( Node* &main){
-        main->left = one_left_rotation(main->left);
-        return one_right_rotation(main);
-    }
-
-    Node* find_min_value(Node* main){
-        if(main == NULL)
-            return  NULL;
-        else if(main->right == NULL)
-            return main;
-        else return find_min_value(main->left);
-    }
-
-    Node* find_max_val(Node* main){
-        if(main == NULL)
-            return NULL;
-        else if (main->right == NULL)
-            return main;
-        else return find_max_val(main->right);
-    }
-
-
-
-    Node* insert(long int item, Node* a)
-    {
-        if(a == NULL)
-        {
-            a = new Node;
-            a->value = item;
-            a->height =0;
-            a->children =0;
-            a->left = a->right = NULL;
-        }
-        else if( item == a->value) return  a;
-        else if (item < a->value)
-        {
-            a->left = insert(item, a->left);
-            if(height(a->left) - height(a->right) == 2)
-            {
-                if (item < a->left->value)
-                    a = one_right_rotation(a);
-                else
-                    a = double_right_rotation(a);
-            }
-        }
-        else if(item > a->value)
-        {
-            a->right = insert(item, a->right);
-            if(height(a->right) - height(a->left) == 2)
-            {
-                if(item > a->right->value)
-                    a = one_left_rotation(a);
-                else
-                    a = double_left_rotation(a);
-            }
+        if (command == 2) {
+            temp_var = 0;
+            int ind = main_find(root, value) + 1;
+            if (temp_var) printf("Data tidak ada\n"); else printf("%d\n", ind);
         }
 
-        a->height = max(height(a->left) , height(a->right))+1;
-        return a;
     }
-
-    bool in_tree(Node* main, int to_be_found){
-        if(main == NULL){
-            return false;
-        }
-        if(main->value == to_be_found){
-            return true;
-        }
-        else if(to_be_found < main->value)
-            return in_tree(main->left,to_be_found);
-        else
-            return in_tree(main->right,to_be_found);
-
-    }
-
-    void find_item_index(Node* main, long int to_be_found)
-    {
-        if (main == NULL){
-            //if(index_main == items){
-            //    cout << "Data tidak ada";
-            //}
-            return;}
-
-        find_item_index(main->left,to_be_found);
-        if (main->value != to_be_found){
-            index_main ++;
-        }
-        if (main->value == to_be_found){
-            cout << index_main+1;
-            return;
-        }
-        find_item_index(main->right,to_be_found);
-    }
-
-
-
-
-
-public:
-    BSTree(){
-        root = NULL;
-    }
-
-    void insert( long int value){
-        root = insert(value,root);
-    }
-
-    void display_index(long int item)
-    {
-        find_item_index(root,item);
-        cout << '\n';
-    }
-
-    bool is_in_tree(int value)
-    {
-        bool found = in_tree(root,value);
-        return found;
-    }
-
-
-
-
-};
-
-
-
-
-int main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-
-    BSTree *my_bst = new BSTree();
-
-    long int cases;
-
-    cin >> cases;
-
-    int command, value;
-
-
-    for (int i = 0; i < cases ; ++i) {
-        cin >> command >> value;
-        if(command == 1){
-            my_bst->insert(value);
-            items++;
-        }
-        else{
-            if(my_bst->is_in_tree(value)){
-                my_bst->display_index(value);
-                index_main = 0;
-            }
-            else{
-                cout << "Data tidak ada" << '\n';
-            }
-        }
-    }
-
-    delete my_bst;
 
     return 0;
 }
