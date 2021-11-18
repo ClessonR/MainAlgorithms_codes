@@ -57,23 +57,13 @@ RM = /home/clesson/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/212.5457.51/bi
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/clesson/Projects/MainAlgorithms_Codes/list4/list4B
+CMAKE_SOURCE_DIR = /home/clesson/Projects/MainAlgorithms_Codes/list5/list5A
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/clesson/Projects/MainAlgorithms_Codes/list4/list4B/cmake-build-debug
+CMAKE_BINARY_DIR = /home/clesson/Projects/MainAlgorithms_Codes/list5/list5A/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
-
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/clesson/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/212.5457.51/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-.PHONY : edit_cache/fast
 
 # Special rule for the target rebuild_cache
 rebuild_cache:
@@ -85,11 +75,21 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/home/clesson/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/212.5457.51/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+.PHONY : edit_cache/fast
+
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/clesson/Projects/MainAlgorithms_Codes/list4/list4B/cmake-build-debug/CMakeFiles /home/clesson/Projects/MainAlgorithms_Codes/list4/list4B/cmake-build-debug//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/clesson/Projects/MainAlgorithms_Codes/list5/list5A/cmake-build-debug/CMakeFiles /home/clesson/Projects/MainAlgorithms_Codes/list5/list5A/cmake-build-debug//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/clesson/Projects/MainAlgorithms_Codes/list4/list4B/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/clesson/Projects/MainAlgorithms_Codes/list5/list5A/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -117,24 +117,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named list4B
+# Target rules for targets named list5A
 
 # Build rule for target.
-list4B: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 list4B
-.PHONY : list4B
+list5A: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 list5A
+.PHONY : list5A
 
 # fast build rule for target.
-list4B/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/list4B.dir/build.make CMakeFiles/list4B.dir/build
-.PHONY : list4B/fast
+list5A/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/list5A.dir/build.make CMakeFiles/list5A.dir/build
+.PHONY : list5A/fast
 
 main.o: main.cpp.o
 .PHONY : main.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/list4B.dir/build.make CMakeFiles/list4B.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/list5A.dir/build.make CMakeFiles/list5A.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -142,7 +142,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/list4B.dir/build.make CMakeFiles/list4B.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/list5A.dir/build.make CMakeFiles/list5A.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -150,7 +150,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/list4B.dir/build.make CMakeFiles/list4B.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/list5A.dir/build.make CMakeFiles/list5A.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -161,7 +161,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... list4B"
+	@echo "... list5A"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
