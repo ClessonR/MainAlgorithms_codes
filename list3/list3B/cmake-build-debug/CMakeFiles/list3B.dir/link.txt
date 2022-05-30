@@ -1,1 +1,0 @@
-/usr/bin/c++ -g CMakeFiles/list3B.dir/main.cpp.o -o list3B 

@@ -1,3 +1,0 @@
-/home/clesson/Projects/MainAlgorithms_Codes/list6/list6A/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/clesson/Projects/MainAlgorithms_Codes/list6/list6A/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/clesson/Projects/MainAlgorithms_Codes/list6/list6A/cmake-build-debug/CMakeFiles/list6A.dir

@@ -1,3 +1,0 @@
-/home/clesson/Projects/MainAlgorithms_Codes/list1B/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/clesson/Projects/MainAlgorithms_Codes/list1B/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/clesson/Projects/MainAlgorithms_Codes/list1B/cmake-build-debug/CMakeFiles/list1B.dir
